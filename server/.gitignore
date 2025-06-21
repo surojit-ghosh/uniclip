@@ -1,0 +1,7 @@
+# Ignore binaries
+*.exe
+*.out
+*.test
+
+# Vendor folder (if you use `go mod vendor`)
+/vendor
