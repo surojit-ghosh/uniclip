@@ -6,15 +6,6 @@
 
 ---
 
-## 🔧 Project Structure
-
-uniclip/
-├── client/ # Frontend (ext.js)
-├── server/ # Backend (Go server)
-└── README.md
-
----
-
 ## 🚀 Features (Planned)
 
 -   🎬 Timestamp-based trimming for YouTube & Twitter videos
