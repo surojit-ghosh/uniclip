@@ -148,6 +148,7 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
+  --muted-grid: color-mix(in oklch, var(--muted) 50%, transparent)
 }
 
 @layer base {

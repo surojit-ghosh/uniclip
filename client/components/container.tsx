@@ -8,7 +8,7 @@ type ContainerProps = {
 
 const Container = ({ children, clasName }: ContainerProps) => {
     return (
-        <section className={cn("max-w-5xl mx-auto p-4", clasName)}>
+        <section className={cn("max-w-5xl w-full mx-auto p-4", clasName)}>
             {children}
         </section>
     );

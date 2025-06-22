@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
+import Background from "@/components/background";
+import { Provider } from "@/components/provider";
 
 const inter = Inter({
     subsets: ["latin"],
@@ -26,12 +29,18 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
     return (
-        <html lang="en" className="darkk">
-            <body
-                className={`${inter.className} ${geistMono.className} antialiased`}
-            >
-                <Header />
-                {children}
+        <html lang="en" className="dark">
+            <body className={`${geistMono.variable} ${inter.variable} relative antialiased`}>
+                <Provider>
+                    <Background />
+                    <main className="z-10">
+                        <Header />
+
+                        {children}
+
+                        <Footer />
+                    </main>
+                </Provider>
             </body>
         </html>
     );

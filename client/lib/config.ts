@@ -1,0 +1,1 @@
+export const github_repo = "surojit-ghosh/uniclip";
