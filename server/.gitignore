@@ -5,3 +5,4 @@
 
 # Vendor folder (if you use `go mod vendor`)
 /vendor
+static/*
