@@ -6,6 +6,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/joho/godotenv"
+	"github.com/surojit-ghosh/uniclip/server/internal/services/download"
 	"github.com/surojit-ghosh/uniclip/server/internal/services/youtube"
 )
 
@@ -13,8 +14,8 @@ func main() {
 	_ = godotenv.Load()
 	app := fiber.New()
 
-	app.Static("/static", "./static")
-	app.Post("/api/youtube/clip", youtube.Handler)
+	app.Post("/api/youtube", youtube.Handler)
+	app.Get("/download/:filename", download.Handler)
 
 	port := os.Getenv("PORT")
 	if port == "" {
