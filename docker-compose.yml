@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+    server:
+        build:
+            context: ./server
+            dockerfile: server.dockerfile
+        expose:
+            - "8000"
+        restart: unless-stopped
+
+    client:
+        build:
+            context: ./client
+            dockerfile: client.dockerfile
+        expose:
+            - "3000"
+        depends_on:
+            - server
+        restart: unless-stopped
+
+    nginx:
+        image: nginx:latest
+        container_name: nginx_proxy
+        volumes:
+            - ./nginx/conf.d:/etc/nginx/conf.d
+            - ./nginx/certs:/etc/letsencrypt
+        ports:
+            - "80:80"
+            - "443:443"
+        depends_on:
+            - client
+            - server
+        restart: unless-stopped
