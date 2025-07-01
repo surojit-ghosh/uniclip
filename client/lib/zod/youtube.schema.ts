@@ -12,7 +12,7 @@ export const youtubeFormSchema = z
                     /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)/;
                 return youtubeRegex.test(url);
             }, "Please enter a valid YouTube URL"),
-        startTime: z
+        start: z
             .string()
             .regex(
                 /^([0-9]{1,2}):([0-5][0-9]):([0-5][0-9])$/,
@@ -20,7 +20,7 @@ export const youtubeFormSchema = z
             )
             .optional()
             .or(z.literal("")),
-        endTime: z
+        end: z
             .string()
             .regex(
                 /^([0-9]{1,2}):([0-5][0-9]):([0-5][0-9])$/,
@@ -31,7 +31,7 @@ export const youtubeFormSchema = z
     })
     .refine(
         (data) => {
-            if (data.startTime && data.endTime) {
+            if (data.start && data.end) {
                 const timeToSeconds = (time: string) => {
                     const [hours, minutes, seconds] = time
                         .split(":")
@@ -39,7 +39,7 @@ export const youtubeFormSchema = z
                     return hours * 3600 + minutes * 60 + seconds;
                 };
                 return (
-                    timeToSeconds(data.startTime) < timeToSeconds(data.endTime)
+                    timeToSeconds(data.start) < timeToSeconds(data.end)
                 );
             }
             return true;

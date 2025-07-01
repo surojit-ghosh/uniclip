@@ -15,15 +15,16 @@ import {
 } from "@/components/ui/form";
 import { withMask } from "use-mask-input";
 import { youtubeFormSchema, type YouTubeFormData } from "@/lib/zod/youtube.schema";
+import apiClient from "@/lib/apiClient";
 
 const YouTubeForm = () => {
     const form = useForm<YouTubeFormData>({
         resolver: zodResolver(youtubeFormSchema),
-        mode: "onChange", // Enable real-time validation
+        mode: "onChange",
         defaultValues: {
             url: "",
-            startTime: "",
-            endTime: "",
+            start: "",
+            end: "",
         },
     });
 
@@ -36,18 +37,16 @@ const YouTubeForm = () => {
 
     const onSubmit = async (data: YouTubeFormData) => {
         try {
-            console.log("Form submitted:", data);
-            // Here you would typically send the data to your backend
-            // Example API call:
-            // const response = await fetch('/api/download', {
-            //   method: 'POST',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify(data),
-            // });
+            const response = await apiClient.post("/api/youtube", data);
 
-            // Simulate API call
-            await new Promise((resolve) => setTimeout(resolve, 2000));
-            alert("Download started! Check your downloads folder.");
+            if (!response.data) throw new Error("No data received from server");
+
+            const link = document.createElement("a");
+            link.href = response.data.url;
+            link.download = "";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
             reset();
         } catch (error) {
             console.error("Error submitting form:", error);
@@ -88,7 +87,7 @@ const YouTubeForm = () => {
                         {/* Start Time */}
                         <FormField
                             control={control}
-                            name="startTime"
+                            name="start"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel className="">Start Time</FormLabel>
@@ -111,7 +110,7 @@ const YouTubeForm = () => {
                         {/* End Time */}
                         <FormField
                             control={control}
-                            name="endTime"
+                            name="end"
                             render={({ field }) => (
                                 <FormItem>
                                     <FormLabel className="">End Time</FormLabel>
