@@ -1,12 +1,10 @@
-version: "3.8"
-
 services:
     server:
         build:
             context: ./server
             dockerfile: server.dockerfile
-        expose:
-            - "8000"
+        ports:
+            - "${SERVER_PORT}:8000"
         env_file:
             - .env
         restart: unless-stopped
@@ -15,8 +13,10 @@ services:
         build:
             context: ./client
             dockerfile: client.dockerfile
-        expose:
-            - "3000"
+            args:
+                NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL}
+        ports:
+            - "3000:3000"
         env_file:
             - .env
         depends_on:

@@ -20,9 +20,9 @@ func main() {
 	app.Post("/api/youtube", youtube.Handler)
 	app.Get("/download/:filename", download.Handler)
 
-	port := os.Getenv("PORT")
+	port := os.Getenv("SERVER_PORT")
 	if port == "" {
-		port = "8000"
+		port = "8001"
 	}
 	log.Fatal(app.Listen(":" + port))
 }
