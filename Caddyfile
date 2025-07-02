@@ -1,0 +1,7 @@
+uniclip.surojit.in {
+    reverse_proxy client:3000
+}
+
+uniclip-server.surojit.in {
+    reverse_proxy server:8000
+}

@@ -8,6 +8,8 @@ services:
         expose:
             - "8000"
         restart: unless-stopped
+        networks:
+            - web
 
     client:
         build:
@@ -18,17 +20,26 @@ services:
         depends_on:
             - server
         restart: unless-stopped
+        networks:
+            - web
 
-    nginx:
-        image: nginx:latest
-        container_name: nginx_proxy
-        volumes:
-            - ./nginx/conf.d:/etc/nginx/conf.d
-            - ./nginx/certs:/etc/letsencrypt
+    caddy:
+        image: caddy:2
+        container_name: caddy
+        restart: unless-stopped
         ports:
             - "80:80"
             - "443:443"
-        depends_on:
-            - client
-            - server
-        restart: unless-stopped
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile
+            - caddy_data:/data
+            - caddy_config:/config
+        networks:
+            - web
+
+networks:
+    web:
+
+volumes:
+    caddy_data:
+    caddy_config:
