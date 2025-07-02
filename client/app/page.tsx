@@ -3,6 +3,7 @@ import DownloadSection from "@/components/download-section";
 import FeaturesSection from "@/components/features-section";
 
 export default function Home() {
+    console.log(process.env.NEXT_PUBLIC_SERVER_URL);
     return (
         <Container clasName="font-inter flex-col flex pt-24 md:pt-28 items-center min-h-screen space-y-8 md:space-y-24">
             <div className="space-y-12">
