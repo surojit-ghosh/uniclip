@@ -13,8 +13,6 @@ services:
         build:
             context: ./client
             dockerfile: client.dockerfile
-            args:
-                NEXT_PUBLIC_SERVER_URL: ${NEXT_PUBLIC_SERVER_URL}
         expose:
             - "3000"
         env_file:

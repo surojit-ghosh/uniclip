@@ -7,8 +7,8 @@ RUN npm install
 
 COPY . .
 
-ARG NEXT_PUBLIC_SERVER_URL=https://uniclip-server.surojit.in
-ENV NEXT_PUBLIC_SERVER_URL=${NEXT_PUBLIC_SERVER_URL}
+# ARG NEXT_PUBLIC_SERVER_URL=https://uniclip-server.surojit.in
+ENV NEXT_PUBLIC_SERVER_URL=https://uniclip-server.surojit.in
 
 RUN npm run build
 
