@@ -16,4 +16,5 @@ RUN go build -o server ./cmd/server
 
 EXPOSE 8000
 
-CMD ["./server"]
+# Add a simple test command
+CMD ["sh", "-c", "echo 'Testing cookie mount:' && ls -la /app/cookies* && echo 'Starting server...' && ./server"]

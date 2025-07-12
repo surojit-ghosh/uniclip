@@ -10,6 +10,8 @@ func DownloadYouTubeVideo(url, output string) error {
 		"--format", "best[ext=mp4]/best",
 		"--output", output,
 		"--no-playlist",
+		"--cookie", "./cookies.txt",
+		"--no-cookies-from-browser",
 		url,
 	)
 	out, err := cmd.CombinedOutput()
