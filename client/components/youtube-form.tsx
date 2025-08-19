@@ -18,7 +18,6 @@ import { youtubeFormSchema, type YouTubeFormData } from "@/lib/zod/youtube.schem
 import apiClient from "@/lib/apiClient";
 
 const YouTubeForm = () => {
-    console.log(process.env.NEXT_PUBLIC_SERVER_URL);
     const form = useForm<YouTubeFormData>({
         resolver: zodResolver(youtubeFormSchema),
         mode: "onChange",

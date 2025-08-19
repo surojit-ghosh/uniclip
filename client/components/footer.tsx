@@ -26,15 +26,23 @@ export function Footer() {
     }, []);
 
     return (
-        <Container clasName="p-0 border-border border-t mt-12 px-4 py-4">
-            <div className="mx-auto w-fit font-mono text-sm">
+        <Container className="border-border mt-12 border-t px-4 py-8">
+            <div className="mx-auto flex w-full items-center justify-between font-mono text-sm">
                 <Link
                     href={`https://github.com/${github_repo}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-accent-foreground space-y-1 text-center transition-all duration-300"
                 >
-                    <p>Built by Surojit Ghosh</p>
+                    <div>Built by Surojit Ghosh</div>
+                </Link>
+
+                <Link
+                    href={`https://github.com/${github_repo}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-accent-foreground space-y-1 text-center transition-all duration-300"
+                >
                     <div className="flex items-center justify-center gap-3">
                         <div className="flex items-center gap-1">
                             <Star className="h-4 w-4" />

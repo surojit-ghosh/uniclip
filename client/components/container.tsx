@@ -3,15 +3,11 @@ import React from "react";
 
 type ContainerProps = {
     children: React.ReactNode;
-    clasName?: string;
+    className?: string;
 };
 
-const Container = ({ children, clasName }: ContainerProps) => {
-    return (
-        <section className={cn("max-w-5xl w-full mx-auto p-4", clasName)}>
-            {children}
-        </section>
-    );
+const Container = ({ children, className }: ContainerProps) => {
+    return <section className={cn("mx-auto w-full max-w-5xl p-4", className)}>{children}</section>;
 };
 
 export default Container;

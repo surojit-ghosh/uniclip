@@ -30,14 +30,12 @@ type Props = {
 export default function RootLayout({ children }: Props) {
     return (
         <html lang="en" className="dark">
-            <body className={`${geistMono.variable} ${inter.variable} relative antialiased`}>
+            <body className={`${geistMono.variable} ${inter.variable} antialiased`}>
                 <Provider>
                     <Background />
-                    <main className="z-10">
-                        <Header />
-
+                    <Header />
+                    <main className="">
                         {children}
-
                         <Footer />
                     </main>
                 </Provider>
