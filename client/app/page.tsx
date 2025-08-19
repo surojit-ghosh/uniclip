@@ -1,5 +1,5 @@
 import Container from "@/components/container";
-import DownloadSection from "@/components/download-section";
+import DownloadForm from "@/components/download-form";
 import FeaturesSection from "@/components/features-section";
 
 export default function Home() {
@@ -13,7 +13,11 @@ export default function Home() {
                     </h1>
                 </div>
 
-                <DownloadSection />
+                <div className="w-full">
+                    <div className="bg-secondary mx-auto mt-6 w-full max-w-xl rounded-lg p-8 shadow-lg">
+                        <DownloadForm />
+                    </div>
+                </div>
             </div>
 
             <FeaturesSection />

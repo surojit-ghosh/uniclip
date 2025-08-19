@@ -29,7 +29,7 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
     return (
-        <html lang="en" className="dark">
+        <html lang="en" className="dark" suppressHydrationWarning>
             <body className={`${geistMono.variable} ${inter.variable} antialiased`}>
                 <Provider>
                     <Background />

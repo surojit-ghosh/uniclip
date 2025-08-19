@@ -1,4 +1,4 @@
-package youtube
+package download
 
 import (
 	"fmt"

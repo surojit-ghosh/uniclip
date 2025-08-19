@@ -5,13 +5,20 @@ export const youtubeFormSchema = z
     .object({
         url: z
             .string()
-            .min(1, "YouTube URL is required")
+            .min(1, "Video URL is required")
             .url("Please enter a valid URL")
             .refine((url) => {
-                const youtubeRegex =
-                    /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)/;
-                return youtubeRegex.test(url);
-            }, "Please enter a valid YouTube URL"),
+                const videoUrlRegex = new RegExp(
+                    "^(https?:\\/\\/)?(www\\.|m\\.)?(?:" +
+                    "(?:youtube\\.com\\/watch\\?v=|youtu\\.be\\/|youtube\\.com\\/embed\\/)|" +
+                    "(?:instagram\\.com\\/(?:reel|p|tv)\\/)|" +
+                    "(?:facebook\\.com\\/(?:watch\\/?\\?v=|.*\\/videos\\/)|fb\\.watch\\/)|" +
+                    "(?:x\\.com\\/[^\\/]+\\/status\\/|twitter\\.com\\/[^\\/]+\\/status\\/)" +
+                    ")",
+                    "i"
+                );
+                return videoUrlRegex.test(url);
+            }, "Please enter a valid YouTube/Instagram/Facebook/X (Twitter) video URL"),
         start: z
             .string()
             .regex(

@@ -8,7 +8,6 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 	"github.com/surojit-ghosh/uniclip/server/internal/services/download"
-	"github.com/surojit-ghosh/uniclip/server/internal/services/youtube"
 )
 
 func main() {
@@ -17,8 +16,8 @@ func main() {
 
 	app.Use(cors.New())
 
-	app.Post("/api/youtube", youtube.Handler)
-	app.Get("/download/:filename", download.Handler)
+	app.Post("/api/download", download.Handler)
+	app.Get("/download/:filename", download.FileDownloader)
 
 	port := os.Getenv("SERVER_PORT")
 	if port == "" {

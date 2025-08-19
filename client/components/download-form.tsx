@@ -17,7 +17,7 @@ import { withMask } from "use-mask-input";
 import { youtubeFormSchema, type YouTubeFormData } from "@/lib/zod/youtube.schema";
 import apiClient from "@/lib/apiClient";
 
-const YouTubeForm = () => {
+const DownloadForm = () => {
     const form = useForm<YouTubeFormData>({
         resolver: zodResolver(youtubeFormSchema),
         mode: "onChange",
@@ -37,7 +37,7 @@ const YouTubeForm = () => {
 
     const onSubmit = async (data: YouTubeFormData) => {
         try {
-            const response = await apiClient.post("/api/youtube", data);
+            const response = await apiClient.post("/api/download", data);
 
             if (!response.data) throw new Error("No data received from server");
 
@@ -56,24 +56,28 @@ const YouTubeForm = () => {
 
     return (
         <>
-            <h2 className="mb-6 text-center text-2xl font-bold">YouTube Video Downloader</h2>
+            <h2 className="mb-3 text-center text-2xl font-bold">Video Downloader</h2>
+            <p className="text-muted-foreground mb-6 text-center text-sm">
+                Download videos from YouTube, Instagram, Twitter, Facebook, and more.
+                <br />
+                Paste the video link below to get started.
+            </p>
 
             <Form {...form}>
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    {/* YouTube URL Input */}
                     <FormField
                         control={control}
                         name="url"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>
-                                    YouTube URL
+                                    Video URL
                                     <span className="text-red-500">*</span>
                                 </FormLabel>
                                 <FormControl>
                                     <Input
                                         type="url"
-                                        placeholder="https://www.youtube.com/watch?v=..."
+                                        placeholder="Paste a video link (YouTube, Instagram, Twitter, Facebook...)"
                                         {...field}
                                     />
                                 </FormControl>
@@ -84,7 +88,6 @@ const YouTubeForm = () => {
 
                     {/* Time Range Section */}
                     <div className="grid grid-cols-2 gap-4">
-                        {/* Start Time */}
                         <FormField
                             control={control}
                             name="start"
@@ -106,8 +109,6 @@ const YouTubeForm = () => {
                                 </FormItem>
                             )}
                         />
-
-                        {/* End Time */}
                         <FormField
                             control={control}
                             name="end"
@@ -141,4 +142,4 @@ const YouTubeForm = () => {
     );
 };
 
-export default YouTubeForm;
+export default DownloadForm;
