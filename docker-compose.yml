@@ -10,6 +10,7 @@ services:
         restart: unless-stopped
         environment:
             - ENV=production
+        volumes: []
 
     client:
         build:
@@ -21,3 +22,5 @@ services:
             - .env
         depends_on:
             - server
+        restart: unless-stopped
+        volumes: []
