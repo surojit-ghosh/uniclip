@@ -23,6 +23,4 @@ services:
             - .env
         depends_on:
             - server
-        restart: unless-stopped
-        volumes:
-            - /coolify/cookies:/cookies
+        volumes: []
