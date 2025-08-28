@@ -9,9 +9,10 @@ import (
 )
 
 func DownloadYouTubeVideo(url, output string) error {
+	log.Printf("%s", os.Getenv("ENV"))
 	isProduction := os.Getenv("ENV") == "production"
 	log.Printf("DownloadYouTubeVideo: ENV=production? %v, URL: %s", isProduction, url)
-	
+
 	cookieFile := filepath.Join(".", "cookie.txt")
 	if isProduction {
 		cookieFile = "/cookies/yt-cookie.txt"
