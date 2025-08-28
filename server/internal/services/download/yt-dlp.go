@@ -9,10 +9,19 @@ import (
 
 func DownloadYouTubeVideo(url, output string) error {
 	isProduction := os.Getenv("ENV") == "production"
-
+	if isProduction {
+		fmt.Print("isProduction")
+	}
 	cookieFile := filepath.Join(".", "cookie.txt")
 	if isProduction {
 		cookieFile = "/cookies/yt-cookie.txt"
+	}
+
+	if _, err := os.Stat(cookieFile); err != nil {
+		if os.IsNotExist(err) {
+			return fmt.Errorf("cookie file not found (production): %s", cookieFile)
+		}
+		return fmt.Errorf("failed to stat cookie file %s: %w", cookieFile, err)
 	}
 
 	cmd := exec.Command("yt-dlp",
