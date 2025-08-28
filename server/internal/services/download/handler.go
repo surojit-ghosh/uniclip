@@ -2,6 +2,7 @@ package download
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"regexp"
 	"time"
@@ -33,12 +34,21 @@ func Handler(c *fiber.Ctx) error {
 
 	switch {
 	case ytRegex.MatchString(body.URL):
+		log.Printf("Starting YouTube download for URL: %s", body.URL)
 		if err := DownloadYouTubeVideo(body.URL, original); err != nil {
-			fmt.Print(err)
-			return c.Status(500).JSON(fiber.Map{"error": "YouTube download failed"})
+			log.Printf("YouTube download failed: %v", err)
+			return c.Status(500).JSON(fiber.Map{
+				"error": "YouTube download failed", 
+				"details": err.Error(),
+			})
 		}
+		log.Printf("YouTube download completed, starting trim")
 		if err := TrimVideo(original, clipped, body.Start, body.End); err != nil {
-			return c.Status(500).JSON(fiber.Map{"error": "Trimming failed"})
+			log.Printf("Video trimming failed: %v", err)
+			return c.Status(500).JSON(fiber.Map{
+				"error": "Trimming failed",
+				"details": err.Error(),
+			})
 		}
 		link := fmt.Sprintf("%s/%s", baseURL, clipped)
 
