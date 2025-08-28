@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 )
 
 func DownloadYouTubeVideo(url, output string) error {
 	isProduction := os.Getenv("ENV") == "production"
 
-	cookieFile := "../../../cookie.txt"
+	cookieFile := filepath.Join(".", "cookie.txt")
 	if isProduction {
 		cookieFile = "/cookies/yt-cookie.txt"
 	}
