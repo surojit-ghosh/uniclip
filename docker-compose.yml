@@ -8,6 +8,8 @@ services:
         env_file:
             - .env
         restart: unless-stopped
+        environment:
+            - ENV=production
 
     client:
         build:
