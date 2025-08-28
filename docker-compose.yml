@@ -10,8 +10,6 @@ services:
         restart: unless-stopped
         environment:
             - ENV=production
-        volumes:
-            - server_cookies:/cookies
 
     client:
         build:
