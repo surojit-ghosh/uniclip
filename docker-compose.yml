@@ -9,7 +9,7 @@ services:
             - .env
         restart: unless-stopped
         volumes:
-            - /secrets:/app/secrets
+            - /coolify/cookies:/cookies
 
     client:
         build:
@@ -23,4 +23,4 @@ services:
             - server
         restart: unless-stopped
         volumes:
-            - /secrets:/app/secrets
+            - /coolify/cookies:/cookies
