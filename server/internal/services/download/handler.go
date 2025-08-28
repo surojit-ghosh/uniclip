@@ -34,11 +34,10 @@ func Handler(c *fiber.Ctx) error {
 
 	switch {
 	case ytRegex.MatchString(body.URL):
-		log.Printf("Starting YouTube download for URL: %s", body.URL)
 		if err := DownloadYouTubeVideo(body.URL, original); err != nil {
 			log.Printf("YouTube download failed: %v", err)
 			return c.Status(500).JSON(fiber.Map{
-				"error": "YouTube download failed", 
+				"error":   "YouTube download failed",
 				"details": err.Error(),
 			})
 		}
@@ -46,7 +45,7 @@ func Handler(c *fiber.Ctx) error {
 		if err := TrimVideo(original, clipped, body.Start, body.End); err != nil {
 			log.Printf("Video trimming failed: %v", err)
 			return c.Status(500).JSON(fiber.Map{
-				"error": "Trimming failed",
+				"error":   "Trimming failed",
 				"details": err.Error(),
 			})
 		}
