@@ -8,6 +8,8 @@ services:
         env_file:
             - .env
         restart: unless-stopped
+        volumes:
+            - /secrets:/app/secrets
 
     client:
         build:
@@ -20,3 +22,5 @@ services:
         depends_on:
             - server
         restart: unless-stopped
+        volumes:
+            - /secrets:/app/secrets
